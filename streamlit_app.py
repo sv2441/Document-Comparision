@@ -16,6 +16,14 @@ from app import (
     final_comparison
 )
 
+# Write the Google Cloud credentials to a temporary file
+with open("google_credentials.json", "w") as f:
+    f.write(st.secrets["GOOGLE_APPLICATION_CREDENTIALS_2"])
+
+# Set the environment variable for Google credentials
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "google_credentials.json"
+os.environ['OPENAI_API_KEY'] = st.secrets["OPENAI_API_KEY"]
+
 # Define constants
 UPLOAD_FOLDER = "UCB PP"
 OUTPUT_FILE = "document_comparision_output.csv"
