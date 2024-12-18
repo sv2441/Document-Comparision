@@ -22,11 +22,16 @@ from langchain_community.document_loaders import JSONLoader
 from langchain_text_splitters import CharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain.agents import Tool, AgentType, initialize_agent
-
+import streamlit as st
 
 load_dotenv()
+# Write the Google Cloud credentials to a temporary file
+with open("google_credentials.json", "w") as f:
+    f.write(st.secrets["GOOGLE_APPLICATION_CREDENTIALS_2"])
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GOOGLE_APPLICATION_CREDENTIALS_2")
+# Set the environment variable for Google credentials
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "google_credentials.json"
+os.environ['OPENAI_API_KEY'] = st.secrets["OPENAI_API_KEY"]
 storage_client = storage.Client()
 bucket_screenshots = storage_client.bucket('dd-media-files')
 
