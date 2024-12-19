@@ -29,3 +29,4 @@ gunicorn
 tldextract
 faiss-cpu
 jq
+pysqlite3-binary
